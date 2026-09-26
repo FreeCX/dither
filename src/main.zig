@@ -1,7 +1,7 @@
 const std = @import("std");
 
 const ppm = @import("ppm.zig");
-const dithering = @import("dithering.zig");
+const dither = @import("dither.zig");
 const kernel = @import("kernel.zig");
 
 const log = std.log.scoped(.app);
@@ -22,7 +22,7 @@ pub fn main(init: std.process.Init) !void {
 
     const image = try ppm.readPixMapImage(arena, io, args[1]);
     defer image.deinit(arena);
-    var bitmap = try dithering.process(arena, shuffled, image);
+    var bitmap = try dither.process(arena, shuffled, image);
     defer bitmap.deinit(arena);
     try ppm.writeBitMapImage(io, args[2], bitmap);
 }

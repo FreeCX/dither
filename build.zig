@@ -12,7 +12,7 @@ pub fn build(b: *std.Build) void {
     });
 
     const exe = b.addExecutable(.{
-        .name = "dithering",
+        .name = "dither",
         .root_module = app,
     });
     b.installArtifact(exe);

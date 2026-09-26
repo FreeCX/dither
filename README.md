@@ -1,7 +1,7 @@
-dithering
+dither
 ---
 
-Демка реализующая дизеринг по [статьям][1] про [дизеринг][2].
+Демка реализующая дизеринг по [крутым][1] [демкам][2].
 
 ```bash
 $ zig build run -- examples/gradient.ppm result/output.ppm
@@ -11,13 +11,13 @@ $ zig build run -- examples/gradient.ppm result/output.ppm
 
 В демке используется перемещанное ядро `Kernel4x4`, но также доступны два базовых ядра для использования
 ```zig
-const dithering = @import("dithering.zig");
+const dither = @import("dither.zig");
 const kernel = @import("kernel.zig");
 
 // ...
 
-_ = try dithering.process(..., kernel.Kernel2x2, ...);
-_ = try dithering.process(..., kernel.Kernel4x4, ...);
+_ = try dither.process(..., kernel.Kernel2x2, ...);
+_ = try dither.process(..., kernel.Kernel4x4, ...);
 ```
 
 [1]: https://visualrambling.space/dithering-part-1/
