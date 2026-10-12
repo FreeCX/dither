@@ -27,3 +27,15 @@ pub fn shuffleKernel(gpa: std.mem.Allocator, base: Kernel, random: std.Random) !
     random.shuffle(u8, @constCast(shuffled.data));
     return shuffled;
 }
+
+pub fn kernelAny(gpa: std.mem.Allocator, size: u8) !Kernel {
+    const count = size * size;
+    const step = 256.0 / @as(f32, @floatFromInt(count));
+
+    const data = try gpa.alloc(u8, count);
+    for (0..count) |index| {
+        data[index] = @round(step * @as(f32, @floatFromInt(index)));
+    }
+
+    return Kernel{ .data = data, .size = size };
+}
