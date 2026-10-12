@@ -1,5 +1,7 @@
 const std = @import("std");
 
+const app_info = @import("build.zig.zon");
+
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
@@ -10,6 +12,10 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
         .imports = &.{},
     });
+
+    const options = b.addOptions();
+    options.addOption([:0]const u8, "name", @tagName(app_info.name));
+    app.addOptions("app_info", options);
 
     const exe = b.addExecutable(.{
         .name = "dither",
