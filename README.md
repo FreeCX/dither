@@ -4,12 +4,14 @@ dither
 Демка реализующая дизеринг по [крутым][1] [демкам][2].
 
 ```bash
-$ zig build run -- examples/gradient.ppm result/output.ppm
+$ zig build run -- 4x4 examples/gradient.ppm result/output.ppm
 ```
 
 В качестве входных и выходных изображении поддержан только формат [netbpm][3] и то в минимальной реализации.
 
-В демке используется перемещанное ядро `Kernel4x4`, но также доступны два базовых ядра для использования
+В демке можно использовать от статических ядер (2x2, 4x4) и до случайных с возможностью перемешивания.
+
+Все ядра доступны в модуле `kernel.zig`
 ```zig
 const dither = @import("dither.zig");
 const kernel = @import("kernel.zig");
@@ -18,6 +20,8 @@ const kernel = @import("kernel.zig");
 
 _ = try dither.process(..., kernel.Kernel2x2, ...);
 _ = try dither.process(..., kernel.Kernel4x4, ...);
+
+// ...
 ```
 
 [1]: https://visualrambling.space/dithering-part-1/
